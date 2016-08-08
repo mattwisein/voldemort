@@ -295,9 +295,9 @@ public class HadoopStoreBuilder extends AbstractHadoopJob {
                     // Here, we try to identify if this is the case.
                     long mapOutputBytes = counters.getCounter(Task.Counter.MAP_OUTPUT_BYTES);
                     long averageNumberOfBytesPerChunk = mapOutputBytes / numChunks / cluster.getNumberOfPartitions();
-                    if (averageNumberOfBytesPerChunk > (HadoopStoreWriter.DEFAULT_CHUNK_SIZE)) {
-                        float chunkSizeBloat = averageNumberOfBytesPerChunk / (float) HadoopStoreWriter.DEFAULT_CHUNK_SIZE;
-                        long suggestedTargetChunkSize = (long) (HadoopStoreWriter.DEFAULT_CHUNK_SIZE / chunkSizeBloat);
+                    if (averageNumberOfBytesPerChunk > (HadoopStoreWriter.MAX_CHUNK_SIZE)) {
+                        float chunkSizeBloat = averageNumberOfBytesPerChunk / (float) HadoopStoreWriter.MAX_CHUNK_SIZE;
+                        long suggestedTargetChunkSize = (long) (HadoopStoreWriter.MAX_CHUNK_SIZE / chunkSizeBloat);
                         logger.error("The number of bytes per chunk may be too high." +
                             " averageNumberOfBytesPerChunk = " + averageNumberOfBytesPerChunk +
                             ". Consider setting " + VoldemortBuildAndPushJob.BUILD_CHUNK_SIZE +

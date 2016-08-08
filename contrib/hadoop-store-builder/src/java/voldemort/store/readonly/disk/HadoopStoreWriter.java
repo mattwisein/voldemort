@@ -59,13 +59,13 @@ public class HadoopStoreWriter
      * For each chunk in a partition, Index files contains the integer offset into
      * the corresponding data file. So it is capped at {@link Integer#MAX_VALUE}.
      */
-    public static final long MAX_CHUNK_SIZE = Integer.MAX_VALUE;
+    public static final long MAX_CHUNK_SIZE = Integer.MAX_VALUE / 100;
 
     /**
      * The default chunk size tries to leave an error margin so that compressed
      * data size on hadoop or skewed data sets don't cause chunk overflows
      */
-    public static final long DEFAULT_CHUNK_SIZE = MAX_CHUNK_SIZE / 2;
+    public static final long DEFAULT_CHUNK_SIZE = Integer.MAX_VALUE / 2;
 
     /**
      * The max number of keys which can collide to the same hash is based on the
@@ -346,7 +346,7 @@ public class HadoopStoreWriter
             this.checkSumDigestValue[chunkId].update(value);
         }
 
-        if(this.position[chunkId] < 0)
+        if(true) /* TODO THIS LINE IS WRONG DO NOT MERGE */
             throw new VoldemortException("Chunk overflow exception: chunk " + chunkId
                                          + " has exceeded " + MAX_CHUNK_SIZE + " bytes.");
 
