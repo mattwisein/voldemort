@@ -256,6 +256,7 @@ public class HadoopStoreBuilder extends AbstractHadoopJob {
             logger.info("Number of chunks: " + numChunks + ", number of reducers: " + numReducers
                 + ", save keys: " + saveKeys + ", reducerPerBucket: " + reducerPerBucket
                 + ", buildPrimaryReplicasOnly: " + buildPrimaryReplicasOnly);
+            logger.info("*** This is Matt's test version, DO NOT DEPLOY OR MERGE ***");
 
             if(isAvro) {
                 conf.setPartitionerClass(AvroStoreBuilderPartitioner.class);
